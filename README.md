@@ -6,12 +6,28 @@
 
 [![CI](https://github.com/medium-effort/vscode-github-account-switcher/actions/workflows/ci.yml/badge.svg)](https://github.com/medium-effort/vscode-github-account-switcher/actions/workflows/ci.yml)
 <!-- [![Open VSX Version](https://img.shields.io/open-vsx/v/medium-effort/github-account-switcher?color=blue&label=Open%20VSX)](https://open-vsx.org/extension/medium-effort/github-account-switcher) -->
-[![Visual Studio Marketplace Version](https://vsmarketplacebadges.dev/version/medium-effort.github-account-switcher.svg)](https://marketplace.visualstudio.com/items?itemName=medium-effort.github-account-switcher)
+<!-- [![Visual Studio Marketplace Version](https://vsmarketplacebadges.dev/version/medium-effort.github-account-switcher.svg)](https://marketplace.visualstudio.com/items?itemName=medium-effort.github-account-switcher) -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 **A lightweight, responsive VS Code extension that displays your active GitHub account in the Status Bar and allows you to quickly switch between multiple accounts and sync local Git identities using the official GitHub CLI (`gh`).**
 
 </div>
+
+<details>
+<summary>AI usage disclosure</summary>
+
+#### 🛠️ Tools Used
+- **IDE / Agent Environment:** Google Antigravity IDE
+- **CLI / Linters / MCP:** codegraph
+- **Skills:** vscode-extension (internal)
+
+#### 🧠 Models Used
+- **Gemini 3.7 Flash**
+
+#### 💬 Author's Note & Commentary
+> *made this so that i could switch account easily in antigravity ide*
+
+</details>
 
 ---
 
@@ -59,8 +75,8 @@ Select **`$(add) Log in new account`** from the QuickPick menu to launch an inte
 
 ## 📦 Installation
 
-### 1. Visual Studio Code Marketplace
-Search for **`GitHub Account Switcher`** in the Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`) and click **Install**.
+<!-- ### 1. Visual Studio Code Marketplace
+Search for **`GitHub Account Switcher`** in the Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`) and click **Install**. -->
 
 <!--
 ### 2. Open VSX Registry (VSCodium, Gitpod, Eclipse Theia)
@@ -70,11 +86,20 @@ ovsx install medium-effort.github-account-switcher
 ```
 -->
 
-### 2. Manual VSIX Installation
-Download the latest `github-account-switcher-x.x.x.vsix` from [GitHub Releases](https://github.com/medium-effort/vscode-github-account-switcher/releases) and run:
+### Manual VSIX Installation
+Download the latest `github-account-switcher-x.x.x.vsix` from [GitHub Releases](https://github.com/medium-effort/vscode-github-account-switcher/releases).
+
+#### Via VS Code / IDE UI
+1. Open the **Extensions** view (`Ctrl+Shift+X` / `Cmd+Shift+X`).
+2. Click the **`···`** (**Views and More Actions**) menu icon at the top-right of the Extensions panel.
+3. Select **`Install from VSIX...`** from the dropdown menu.
+4. Select the downloaded `.vsix` file to install.
+
+#### Via Command Line
 ```bash
 code --install-extension github-account-switcher-0.1.5.vsix
 ```
+
 
 ---
 
