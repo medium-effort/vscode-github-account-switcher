@@ -1,0 +1,64 @@
+name: 🐛 Bug Report
+description: Create a report to help us improve GitHub Account Switcher
+labels: ['bug', 'triage']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: version
+    attributes:
+      label: Extension Version
+      description: What version of GitHub Account Switcher are you running?
+      placeholder: e.g. 0.1.5
+    validations:
+      required: true
+  - type: input
+    id: vscode-version
+    attributes:
+      label: VS Code & OS Version
+      description: Which VS Code version and OS are you using?
+      placeholder: e.g. VS Code 1.90.0 on Windows 11 / Ubuntu 24.04 / macOS Sonoma
+    validations:
+      required: true
+  - type: input
+    id: gh-version
+    attributes:
+      label: GitHub CLI (`gh`) Version
+      description: What is the output of `gh --version`?
+      placeholder: e.g. gh version 2.50.0 (2024-05-28)
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the Bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps To Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Open VS Code with multiple accounts in `gh auth status`
+        2. Click the status bar item
+        3. Switch to account 'work-dev'
+        4. See error
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: gh-status-output
+    attributes:
+      label: `gh auth status` Output (Optional)
+      description: Please sanitize any private tokens before pasting!
+      render: shell

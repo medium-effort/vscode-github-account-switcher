@@ -1,0 +1,132 @@
+{
+  "name": "github-account-switcher",
+  "displayName": "GitHub Account Switcher",
+  "description": "Show active GitHub account in the status bar and quickly switch accounts using GitHub CLI (gh).",
+  "version": "0.1.5",
+  "publisher": "medium-effort",
+  "license": "MIT",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "SCM Providers"
+  ],
+  "keywords": [
+    "github",
+    "account",
+    "switch",
+    "switcher",
+    "gh",
+    "status bar",
+    "git"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "github-account-switcher.switchAccount",
+        "title": "Switch GitHub Account",
+        "category": "GitHub Account Switcher",
+        "icon": "$(github)"
+      },
+      {
+        "command": "github-account-switcher.refresh",
+        "title": "Refresh Accounts",
+        "category": "GitHub Account Switcher",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "github-account-switcher.login",
+        "title": "Log In New Account",
+        "category": "GitHub Account Switcher",
+        "icon": "$(add)"
+      }
+    ],
+    "configuration": {
+      "title": "GitHub Account Switcher",
+      "properties": {
+        "githubAccountSwitcher.refreshInterval": {
+          "type": "number",
+          "default": 60,
+          "description": "Interval in seconds to automatically refresh active GitHub account status (0 to disable automatic polling)."
+        },
+        "githubAccountSwitcher.statusBarAlignment": {
+          "type": "string",
+          "enum": [
+            "left",
+            "right"
+          ],
+          "default": "right",
+          "description": "Alignment of the GitHub account item in the Status Bar."
+        },
+        "githubAccountSwitcher.statusBarPriority": {
+          "type": "number",
+          "default": 100,
+          "description": "Priority order of the GitHub account item in the Status Bar (higher numbers appear further to the left in each section)."
+        },
+        "githubAccountSwitcher.showHost": {
+          "type": "boolean",
+          "default": true,
+          "description": "Display host domain prefix in status bar when connected to non-github.com hosts (e.g. GitHub Enterprise)."
+        },
+        "githubAccountSwitcher.ghPath": {
+          "type": "string",
+          "default": "gh",
+          "description": "Custom path to the GitHub CLI (gh) executable, if not found in system PATH."
+        },
+        "githubAccountSwitcher.syncGitConfig": {
+          "type": "string",
+          "enum": [
+            "local",
+            "global",
+            "off"
+          ],
+          "default": "local",
+          "description": "Automatically synchronize git config (user.name and user.email) when switching accounts ('local' updates current repo .git/config, 'global' updates global git config, 'off' disables sync)."
+        },
+        "githubAccountSwitcher.autoSwitchOnWorkspaceOpen": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically detect local repository git identity (user.email, user.name, or remote origin URL) when opening a workspace and switch to the matching GitHub account."
+        },
+        "githubAccountSwitcher.autoSwitchOnWindowFocus": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically detect local repository git identity and switch to the matching GitHub account when returning/focusing this VS Code window."
+        }
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/medium-effort/vscode-github-account-switcher"
+  },
+  "bugs": {
+    "url": "https://github.com/medium-effort/vscode-github-account-switcher/issues"
+  },
+  "homepage": "https://github.com/medium-effort/vscode-github-account-switcher#readme",
+  "scripts": {
+    "vscode:prepublish": "node esbuild.js --production",
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "npx --yes @vscode/vsce package --no-dependencies",
+    "publish:vsce": "vsce publish",
+    "publish:ovsx": "ovsx publish",
+    "check-types": "tsc --noEmit",
+    "test": "tsx test/parser.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
+    "esbuild": "^0.20.0",
+    "ovsx": "^0.9.5",
+    "tsx": "^4.23.12",
+    "typescript": "^5.3.3"
+  }
+}

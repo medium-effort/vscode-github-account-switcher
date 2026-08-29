@@ -1,0 +1,56 @@
+name: Release & Publish
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Package & Publish Extension
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Build Production Bundle
+        run: npm run vscode:prepublish
+
+      - name: Package VSIX
+        run: |
+          npx @vscode/vsce package --no-dependencies --out extension.vsix
+
+      - name: Upload VSIX to GitHub Release Assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./extension.vsix
+          asset_name: ${{ github.event.repository.name }}-${{ github.event.release.tag_name }}.vsix
+          asset_content_type: application/zip
+        if: github.event_name == 'release'
+
+      # - name: Publish to Open VSX Registry
+      #   if: env.OVSX_PAT != ''
+      #   env:
+      #     OVSX_PAT: ${{ secrets.OVSX_PAT }}
+      #   run: npx ovsx publish extension.vsix -p ${{ secrets.OVSX_PAT }}
+
+      - name: Publish to VS Code Marketplace
+        if: env.VSCE_PAT != ''
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: npx @vscode/vsce publish --packagePath extension.vsix -p ${{ secrets.VSCE_PAT }}
